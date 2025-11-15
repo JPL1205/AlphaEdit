@@ -124,10 +124,7 @@ def main(
 
     if type(model_name) is str:
         print("Instantiating model")
-        load_kwargs = {}
-        if model_name in LOAD_8BIT_MODELS:
-            load_kwargs = dict(load_in_8bit=True, device_map="auto")
-        model = AutoModelForCausalLM.from_pretrained(model_name, **load_kwargs)
+        model = AutoModelForCausalLM.from_pretrained(model_name).cuda()
         tok = AutoTokenizer.from_pretrained(model_name, use_fast=False)
         tok.pad_token = tok.eos_token
     else:

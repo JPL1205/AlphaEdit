@@ -170,7 +170,17 @@ def layer_stats(
 
     print(f"Computing Cov locally....")
 
-    ds = get_ds() if not filename.exists() else None
+    file_extension = f"{model_name}/{ds_name}_stats/{layer_name}_{precision}_{'-'.join(sorted(to_collect))}{size_suffix}.npz"
+    filename = stats_dir / file_extension
+
+    print(f"looking for file {filename}")
+    if filename.exists():
+        print(f"Loading cached stats from {filename}")
+        ds = None
+    else:
+        print(f"Cache miss; recomputing stats to {filename}")
+        ds = get_ds()
+
     if progress is None:
         progress = lambda x: x
 
