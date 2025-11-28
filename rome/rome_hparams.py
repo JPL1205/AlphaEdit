@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import List
 
+from util.globals import STATS_DIR
 from util.hparams import HyperParams
 
 
@@ -30,3 +31,4 @@ class ROMEHyperParams(HyperParams):
     mom2_dataset: str
     mom2_n_samples: int
     mom2_dtype: str
+    stats_dir: str = str(STATS_DIR)
